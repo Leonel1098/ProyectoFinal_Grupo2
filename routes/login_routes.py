@@ -3,9 +3,9 @@ from flask_jwt_extended import create_access_token
 from models.model_usuario import Usuario
 from utils.hash_util import check_password
 
-auth_bp = Blueprint("auth", __name__)
+usuario_bp = Blueprint("auth", __name__)
 
-@auth_bp.route("/login", methods=["POST"])
+@usuario_bp.route("/login", methods=["POST"])
 def login():
     data = request.json
     usuario = Usuario.find_by_email(data["email"])

@@ -1,3 +1,8 @@
+from flask import Blueprint, jsonify, request
+from models.model_departamento import Departamento
+from utils.auth_middleware import role_required
+
+departamento_bp = Blueprint("departamento", __name__)
 @departamento_bp.route("/", methods=["POST"])
 @role_required("admin_empresa")
 def crear_departamento():
