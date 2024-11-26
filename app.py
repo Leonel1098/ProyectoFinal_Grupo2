@@ -2,11 +2,13 @@ from flask import Flask
 from flask_pymongo import PyMongo
 from flask_jwt_extended import JWTManager
 from config import Config
+from flask_cors import CORS
+
 
 # Inicializar aplicación
 app = Flask(__name__)
 app.config.from_object(Config)
-
+CORS(app)
 # Inicializar extensiones
 mongo = PyMongo(app)
 jwt = JWTManager(app)

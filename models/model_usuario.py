@@ -5,7 +5,7 @@ client = MongoClient("mongodb+srv://gonzalezleonel1098:Leonel10@cluster0.uapuf.m
 db = client["Gestor_Tareas"]
 
 class Usuario:
-    collection = db["Usuarios"]
+    collection = db["Empleados"]
 
     @staticmethod
     def crear_usuario(data):
