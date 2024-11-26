@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <title>Login</title>
     <style>
         body {
@@ -78,35 +80,42 @@
     </div>
 
     <script>
+        
         document.getElementById("login-form").addEventListener("submit", async function (e) {
-        e.preventDefault(); // Detiene el comportamiento por defecto del formulario
+            e.preventDefault(); // Detiene el comportamiento por defecto del formulario
 
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
 
-        try {
-            const response = await axios.post("http://127.0.0.1:5000/login", {
-                                    email: email,
-                                    password: password
-                                }, {
-                                    headers: {
-                                        'Content-Type': 'application/json'
-                                    }
-                                });
+            try {
+                // Realizar la solicitud POST con fetch
+                const response = await fetch("http://127.0.0.1:5000/usuarios/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json", // Especificar el tipo de contenido
+                    },
+                    body: JSON.stringify({ email: email, password: password }), // Convertir los datos a JSON
+                });
 
-            const messageDiv = document.getElementById("message");
-            messageDiv.textContent = "Inicio de sesión exitoso. Token: " + response.data.token;
-            messageDiv.className = "message success";
-        } catch (error) {
-            const messageDiv = document.getElementById("message");
-            if (error.response) {
-                messageDiv.textContent = error.response.data.msg || "Error al iniciar sesión.";
-            } else {
+                // Verificar si la respuesta es exitosa
+                if (response.ok) {
+                    const data = await response.json(); // Extraer el JSON de la respuesta
+                    const messageDiv = document.getElementById("message");
+                    messageDiv.textContent = "Inicio de sesión exitoso. Token: " + data.token;
+                    messageDiv.className = "message success";
+                } else {
+                    const errorData = await response.json();
+                    const messageDiv = document.getElementById("message");
+                    messageDiv.textContent = errorData.msg || "Error al iniciar sesión.";
+                    messageDiv.className = "message error";
+                }
+            } catch (error) {
+                // Manejar errores de conexión o problemas en el fetch
+                const messageDiv = document.getElementById("message");
                 messageDiv.textContent = "Error de conexión con el servidor.";
+                messageDiv.className = "message error";
             }
-            messageDiv.className = "message error";
-        }
-    });
+        });
 
     </script>
 </body>
