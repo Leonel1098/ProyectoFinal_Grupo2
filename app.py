@@ -23,7 +23,7 @@ from routes.empresa_routes import empresa_bp
 from routes.departamento_routes import departamento_bp
 from routes.tareas_routes import tarea_bp
 
-app.register_blueprint(usuario_bp, url_prefix="/usuarios")
+app.register_blueprint(usuario_bp)
 app.register_blueprint(empresa_bp, url_prefix="/empresas")
 app.register_blueprint(departamento_bp, url_prefix="/departamento")
 app.register_blueprint(tarea_bp, url_prefix="/tareas")
@@ -39,4 +39,4 @@ if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))  # Puerto por defecto 5000 si no se encuentra el 'PORT'
     
     # Ejecutar la aplicación Flask con SocketIO
-    socket_io.run(app, host='127.0.0.0', port=port, debug=True)
+    socket_io.run(app, host='0.0.0.0', port=port, debug=True)

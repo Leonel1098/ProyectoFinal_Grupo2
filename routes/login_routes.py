@@ -7,6 +7,11 @@ from config import socket_io
 usuario_bp = Blueprint("login", __name__)
 
 @usuario_bp.route("/", methods=["GET", "POST"])
+def root():
+    # Redirigir la raíz a la página de login
+    return redirect(url_for('login.login'))  # Redirige a la ruta /login
+
+@usuario_bp.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "GET":
         # Renderiza el formulario de login
@@ -55,9 +60,6 @@ def dashboard():
 
     # Renderiza la página del dashboard
     return render_template("dashboard.html", usuario=usuario)
-    
-
-
 
 @usuario_bp.route("/registrar", methods=["GET", "POST"])
 def registrar_usuario():
@@ -98,8 +100,6 @@ def registrar_usuario():
         else:
             #return jsonify({"msg": "Error al registrar el usuario"}), 500
             return render_template("registro.html")
-
-
 
 @usuario_bp.route("/logout")
 def logout():
