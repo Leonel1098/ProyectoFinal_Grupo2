@@ -39,4 +39,4 @@ if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))  # Puerto por defecto 5000 si no se encuentra el 'PORT'
     
     # Ejecutar la aplicación Flask con SocketIO
-    socket_io.run(app, host='0.0.0.0', port=port, debug=True)
+    socket_io.run(app, host='127.0.0.0', port=port, debug=True)
