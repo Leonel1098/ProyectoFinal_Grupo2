@@ -42,7 +42,7 @@ def login():
         }
 
         # Redirige al dashboard tras el inicio de sesión exitoso
-        return redirect(url_for("usuarios.dashboard"))
+        return redirect(url_for("login.dashboard"))
 
 @usuario_bp.route("/dashboard")
 def dashboard():
@@ -99,3 +99,9 @@ def registrar_usuario():
             #return jsonify({"msg": "Error al registrar el usuario"}), 500
             return render_template("registro.html")
 
+
+
+@usuario_bp.route("/logout")
+def logout():
+    session.pop("usuario", None)
+    return redirect(url_for("login.login"))
