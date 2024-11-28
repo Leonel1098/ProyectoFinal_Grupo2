@@ -1,7 +1,7 @@
 from bson import ObjectId
 from pymongo import MongoClient
 
-client = MongoClient("mongodb+srv://gonzalezleonel1098:Leonel10@cluster0.uapuf.mongodb.net/")
+client = MongoClient("mongodb+srv://gonzalezleonel1098:Leonel10@cluster0.uapuf.mongodb.net/?tls=true")
 db = client["Gestor_Tareas"]
 
 class Departamento:
